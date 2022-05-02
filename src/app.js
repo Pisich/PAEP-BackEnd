@@ -1,8 +1,13 @@
 const express = require('express');
 const path = require('path');
 const swaggerUi = require('swagger-ui-express');
+const passport = require('passport');
+const cookieSession = require('cookie-session');
+const authRoute = require('./routes/auth.route');
 const YAML = require('yamljs');
 const cors = require('cors');
+
+require('./config/passport');
 require('dotenv').config();
 
 const usersRoute = require('./routes/users.route');
@@ -11,6 +16,14 @@ const {NotFoundError} = require('./utils/errors');
 
 const app = express();
 const swaggerDocument = YAML.load('src/docs/swagger.yaml');
+
+app.use(cookieSession({
+  maxAge: 24 * 60 * 60 * 1000,
+  keys: ['clave'] //clave para encriptar
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+app.use('/auth', authRoute);
 
 app.use(cors());
 app.use(express.json());
