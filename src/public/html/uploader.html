@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Uploader</title>
+</head>
+
+<body>
+  <h1>Profile Uploader 📁</h1>
+
+  <form method="POST" action="" enctype="multipart/form-data">
+    <input type="file" name="profilePicture" />
+    <br>
+    <input type="radio" name="path" value="profilePictureLocal">
+    <label for="path">Locally</label>
+    <input type="radio" name="path" value="profilePicture" checked="checked">
+    <label for="path">To the cloud</label>
+    <br>
+    <br>
+    <br>
+    <button type="submit">Upload file!</button>
+  </form>
+  <script>
+    const url = 'http://localhost:3000/users/';
+    const form = document.querySelector('form');
+    const locally = document.querySelector('input[value="profilePictureLocal"]');
+    const cloud = document.querySelector('input[value="profilePicture"]');
+    form.action = url + cloud.value;
+    function onChangeListener(event) {
+      form.action = url + event.target.value;
+    }
+    locally.addEventListener('change', onChangeListener);
+    cloud.addEventListener('change', onChangeListener);
+  </script>
+</body>
+
+</html>
