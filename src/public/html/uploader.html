@@ -12,11 +12,11 @@
   <h1>Profile Uploader 📁</h1>
 
   <form method="POST" action="" enctype="multipart/form-data">
-    <input type="file" name="profilePicture" />
+    <input type="file" name="poliza" />
     <br>
     <input type="radio" name="path" value="profilePictureLocal">
     <label for="path">Locally</label>
-    <input type="radio" name="path" value="profilePicture" checked="checked">
+    <input type="radio" name="path" value="poliza" checked="checked">
     <label for="path">To the cloud</label>
     <br>
     <br>
@@ -24,10 +24,10 @@
     <button type="submit">Upload file!</button>
   </form>
   <script>
-    const url = 'http://localhost:3000/users/';
+    const url = 'http://localhost:3000/upload/';
     const form = document.querySelector('form');
     const locally = document.querySelector('input[value="profilePictureLocal"]');
-    const cloud = document.querySelector('input[value="profilePicture"]');
+    const cloud = document.querySelector('input[value="poliza"]');
     form.action = url + cloud.value;
     function onChangeListener(event) {
       form.action = url + event.target.value;

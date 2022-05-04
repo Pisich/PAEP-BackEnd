@@ -10,7 +10,7 @@ const dbURI = `mongodb+srv://${DB_USERNAME}:${DB_PASSWORD}@${DB_CLUSTER}/${DB_NA
 mongoose.connect(dbURI);
 
 mongoose.connection.on('connected', function() {
-  console.log(`Moongose connection open to ${dbURI}`);
+  console.log(`Moongose connection open to ${DB_NAME}`);
 });
 
 mongoose.connection.on('disconnected', function() {

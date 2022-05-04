@@ -1,18 +1,16 @@
 const passport = require('passport');
 const Customer = require('../models/schemas/Customer');
-const Poliza = require('../models/schemas/Poliza');
-const Aseguradora = require('../models/schemas/Aseguradora');
 
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 
-passport.serializeUser(function (user, done) {
+passport.serializeUser(function (customer, done) {
   console.log('Serializing user');
-  done(null, user.id);
+  done(null, customer.email);
 });
 
-passport.deserializeUser(function (id, done) {
-  User.find(id)
-  .then(user => done(null, user))
+passport.deserializeUser(function (email, done) {
+  Customer.find({email: email})
+  .then(customer => done(null, email))
   .catch(err => done(err));
 });
 
@@ -24,14 +22,15 @@ passport.use(
     },
     function (accessToken, refreshToken, profile, done) {
       console.log('Working...');
-      const user = {
-        'id': profile.id,
-        'username': profile.displayName,
-        'email': profile._json.email,
-        'img_url': profile._json.picture
-      }
-      User.find(user.id).then(done(null, user))
-      .catch(err => User.create(user));
+      console.log(profile);
+      const customer = {
+        name: profile.name.givenName,
+        lastName: profile.name.familyName,
+        email: profile._json.email,
+        telefono: 'none'
+      };
+      Customer.find({email: customer.email}).then(done(null, customer))
+      .catch(err => Customer.create(customer));
     }
   )
 );

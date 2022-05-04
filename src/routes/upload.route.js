@@ -1,11 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const uploadGCS = require('../utils/multer');
+const polizaController = require('../controllers/poliza.controller');
 
-router.post('/poliza', uploadGCS.single('poliza'), (req, res) => {
+router.post('/poliza', uploadGCS.single('poliza'), async (req, res) => {
   console.log(req.file);
-  // Save in DB
-  res.redirect('/profile');
+  await polizaController.create(req.file.filename, 'Poliza Basica', Date.now(), req.file.path);
+  res.redirect('/');
 });
 
 module.exports = router;

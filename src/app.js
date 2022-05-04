@@ -7,11 +7,11 @@ const authRoute = require('./routes/auth.route');
 const YAML = require('yamljs');
 const cors = require('cors');
 
-require('./config/passport');
 require('dotenv').config();
+require('./config/db');
+require('./config/passport');
 
-const usersRoute = require('./routes/users.route');
-const locationsRoute = require('./routes/locations.route');
+const uploadRoute = require('./routes/upload.route');
 const {NotFoundError} = require('./utils/errors');
 
 const app = express();
@@ -24,6 +24,7 @@ app.use(cookieSession({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use('/auth', authRoute);
+app.use('/upload', uploadRoute);
 
 app.use(cors());
 app.use(express.json());
@@ -38,8 +39,6 @@ app.get('/uploader', (req, res) => {
   res.redirect('/public/html/uploader.html');
 });
 
-app.use('/users', usersRoute);
-app.use('/locations', locationsRoute);
 
 app.use((err, req, res, next) => {
   console.log('Error', err);

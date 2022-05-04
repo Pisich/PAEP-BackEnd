@@ -14,6 +14,11 @@ const polizaSchema = new mongoose.Schema({
     type: String,
     unique: true,
     required: true
+  },
+  polizaUrl: {
+    type: String,
+    unique: true,
+    required: true
   }
 });
 
