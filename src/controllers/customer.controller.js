@@ -14,7 +14,7 @@ const customerController = {
   },
   get: async function(email) {
     const customer = await Customer.findOne({email: email});
-    if (customer === {}) throw new NotFoundError(`email ${email} not associated to any account`);
+    if (customer === null) throw new NotFoundError(`email ${email} not associated to any account`);
     return customer;
   },
   getUserPolizas: async function(email) {
@@ -32,7 +32,7 @@ const customerController = {
   },
   update: async function(name, lastName, email, telefono) {
     const customer = await Customer.findOne({email: email})
-    if (customer !== {}) {
+    if (customer !== null) {
       await Customer.findOneAndRemove({email: email});
       await Customer.create({name: name, lastName: lastName, email: email, telefono: telefono})
     }
@@ -40,7 +40,7 @@ const customerController = {
   },
   delete: async function(email) {
     const customer = await Customer.findOneAndRemove({email: email});
-    if (customer === {}) {
+    if (customer === null) {
     throw new NotFoundError(`email ${email} not associated to any account`);
     }
     return customer;

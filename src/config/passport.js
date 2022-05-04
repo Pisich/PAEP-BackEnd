@@ -5,15 +5,15 @@ const customerController = require('../controllers/customer.controller');
 
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 
-passport.serializeUser(async function (customer, done) {
+passport.serializeUser(function (customer, done) {
   console.log('Serializing user');
   done(null, customer.email);
 });
 
 passport.deserializeUser(function (email, done) {
   customerController.get(email)
-  .then(customer => done(null, email))
-  .catch(err => done(err));
+    .then(customer => done(null, email))
+    .catch(err => done(err));
 });
 
 passport.use(
@@ -31,8 +31,8 @@ passport.use(
         telefono: 'none'
       };
       customerController.get(customer.email)
-      .then(done(null, customer))
-      .catch(err => customerController.create(customer));
+        .then(customer2 => done(null, customer))
+        .catch(err => customerController.create(profile.name.givenName, profile.name.familyName, profile._json.email, 'none'));
     }
   )
 );

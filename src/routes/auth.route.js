@@ -18,8 +18,11 @@ router.get('/google/callback',
 );
 
 router.get('/logout', (req, res) => {
-  req.logout(), req.session = null;
-  res.redirect('/profile');
+  req.logout();
+  req.session = null;
+  res.clearCookie('session.sid');
+  res.clearCookie('session');
+  res.redirect('/loggedOut');
 });
 
 router.get('/verifyLogin', (req, res) => {
