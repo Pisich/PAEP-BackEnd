@@ -13,9 +13,14 @@ router.get('/google/callback',
   function (req, res) {
     console.log(req.query.code);
     console.log('Logged in successfully!');
-    res.redirect('/profile');
+    res.redirect('/');
   }
 );
+
+router.get('/logout', (req, res) => {
+  req.logout(), req.session = null;
+  res.redirect('/profile');
+});
 
 router.get('/verifyLogin', (req, res) => {
   if(req.user) {

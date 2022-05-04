@@ -2,8 +2,7 @@ const express = require('express');
 const router = express.Router();
 
 const {handleError} = require('../utils/hof');
-const userController = require('../controllers/user.controller')
-const quotesController = require('../controllers/external.controller');
+
 // const {createSchema, updateSchema} = require('../models/schemas/user.schema');
 const {uploadLocal} = require('../utils/multer');
 // path prefix /users
