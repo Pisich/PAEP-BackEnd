@@ -32,7 +32,8 @@ passport.use(
       };
       customerController.get(customer.email)
         .then(customer2 => done(null, customer))
-        .catch(err => customerController.create(profile.name.givenName, profile.name.familyName, profile._json.email, 'none'));
+        .catch(err => customerController.create(profile.name.givenName,
+          profile.name.familyName, profile._json.email, 'none'));
     }
   )
 );
