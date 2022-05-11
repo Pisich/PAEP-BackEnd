@@ -13,7 +13,7 @@
 
   <script>
     const image = document.querySelector('img');
-    fetch('http://localhost:3000/users/getProfilePicture')
+    fetch('https://paep22-backend.herokuapp.com/users/getProfilePicture')
       .then(response => response.json())
       .then(({ url }) => {
         image.src = url;

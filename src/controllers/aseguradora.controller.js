@@ -4,11 +4,11 @@ const mongoose = require('mongoose');
 const Aseguradora = require('../models/schemas/Aseguradora');
 
 const aseguradoraController = {
-  get: function () {
+  get: async function () {
     const aseguradora = await Aseguradora.findAll();
     return aseguradora;
   },
-  getByNombre: function (nombre) {
+  getByNombre: async function (nombre) {
     const aseguradora = await Aseguradora.findOne({
       nombre: nombre
     });
@@ -16,7 +16,7 @@ const aseguradoraController = {
       } not found.`);
     return aseguradora;
   },
-  create: function (nombre, RFC, telefono) {
+  create: async function (nombre, RFC, telefono) {
     const aseguradora = await Aseguradora.create({
       nombre: nombre,
       RFC: RFC,
@@ -24,7 +24,7 @@ const aseguradoraController = {
     });
     return aseguradora;
   },
-  update: function (nombre, RFC, telefono) {
+  update: async function (nombre, RFC, telefono) {
     const aseguradora = await Aseguradora.findOne({ nombre: nombre })
     if (aseguradora !== {}) {
       await Aseguradora.findOneAndUpdate({ nombre: nombre },
@@ -36,7 +36,7 @@ const aseguradoraController = {
     }
     throw new NotFoundError(`RFC ${RFC} not associated to any account`);
   },
-  delete: function (RFC) {
+  delete: async function (RFC) {
     const aseguradora = await Aseguradora.findOneAndRemove({ RFC: RFC });
     if (aseguradora === {}) {
       throw new NotFoundError(`RFC ${RFC} not associated to any account`);
