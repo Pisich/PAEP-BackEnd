@@ -20,7 +20,7 @@ passport.use(
   new GoogleStrategy({
       clientID: process.env.CLIENT_ID,
       clientSecret: process.env.CLIENT_SECRET,
-      callbackURL: 'http://localhost:3000/auth/google/callback'
+      callbackURL: 'https://paep22-backend.herokuapp.com/auth/google/callback'
     },
     async function (accessToken, refreshToken, profile, done) {
       console.log('Working...');
