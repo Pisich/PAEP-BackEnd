@@ -12,14 +12,29 @@ const polizaSchema = new mongoose.Schema({
   },
   polizaNumber: {
     type: String,
-    unique: true,
     required: true
   },
   polizaUrl: {
     type: String,
-    unique: true,
     required: true
-  }
+  },
+  asegurado: {
+    type: String,
+    required: true
+  },
+  aseguradora: {
+    type: mongoose.Types.ObjectId,
+    ref: 'Aseguradora'
+  },
+  tipo: {
+    type: String,
+    required: true
+  },
+  active: {
+    type: Boolean,
+    default: true
+  },
+
 });
 
 const Poliza = mongoose.model('Poliza', polizaSchema);

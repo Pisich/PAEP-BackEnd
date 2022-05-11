@@ -1,92 +1,42 @@
-const {getJSON, saveJSON} = require('../utils/fileHelpers');
-const {NotFoundError} = require('../utils/errors');
+const { NotFoundError } = require('../utils/errors');
 
-const Customer = require('../models/schemas/Customer');
-const Poliza = require('../models/schemas/Poliza');
-const Aseguradora = require('../models/schemas/Aseguradora');
+const User = require('../models/schemas/Users.js');
 
 const userController = {
-  saveProfilePicture: function(url) {
-    const data = getJSON();
-    data.profilePicutre = url;
-    saveJSON(data);
-  },
-  getProfilePicture: function() {
-    const data = getJSON();
-    return data.profilePicutre || '';
-  },
-  list: function() {
-    const data = getJSON();
-    return data.users;
-  },
-  getIndex: function(identifier) {
-    const data = getJSON();
-    const index = data.users.findIndex(({username}) => username === identifier);
-    return index;
-  },
-  get: async function(identifier) {
-    const user = await User.findById(identifier);
+  get: async function () {
+    const user = await User.findAll();
     return user;
   },
-  getUserLocations: function(username) {
-    const data = getJSON();
-    const user = this.get(username);
-    const {locations = []} = user;
-    return locations.map(index => data.locations[index]);
-  },
-  create: function(name, lastName, username) {
-    const user = {name, lastName, username};
-    const data = getJSON();
-    data.users.push(user);
-    saveJSON(data);
+  create: async function (name, lastname, descripcion, puesto, imgLink, email) {
+    const user = await User.create({
+      name: name,
+      lastname: lastname,
+      descripcion: descripcion,
+      puesto: puesto,
+      imgLink: imgLink,
+      email: email
+    });
     return user;
   },
-  update: function(username, name, lastName) {
-    const data = getJSON();
-    const user = this.get(username);
-    user.name = name || user.name;
-    user.lastName = lastName || user.lastName;
-    const index = this.getIndex(username);
-    if (index > 0) {
-      data.users[index] = {...data.users[index], ...user};
-      saveJSON(data);
-      return data.users[index];
+  update: async function (name, lastname, descripcion, puesto, imgLink) {
+    const user = await User.findOne({ email: email });
+    if (polizaa !== {}) {
+      await Poliza.findOneAndUpdate({ email: email }, {
+        name: name,
+        lastname: lastname,
+        descripcion: descripcion,
+        puesto: puesto,
+        imgLink: imgLink,
+        email: email
+      }, { useFindAndModify: false });
     }
-    throw new NotFoundError(`user with the username: ${username}`)
+    throw new NotFoundError(`User ${email} not associated to any email`);
   },
-  delete: function(username) {
-    const data = getJSON();
-    const index = this.getIndex(username);
-    if (index >= 0) {
-      const user = data.users.splice(index, 1);
-      saveJSON(data);
-      return user;
+  delete: async function (email) {
+    const user = await User.findOneAndRemove({ email: email });
+    if (user === {}) {
+      throw new NotFoundError(`User ${email} not associated to any email`);
     }
-    throw new NotFoundError(`user with the username ${username}`);
-  },
-  addLocation: function(username, locationName) {
-    const data = getJSON();
-    const index = this.getIndex(username);
-    const locationIndex = locationController.getIndex(locationName);
-    if (index < 0 || locationIndex < 0) {
-      return {};
-    }
-    const user = data.users[index];
-    if (user.locations === undefined) user.locations = [];
-    user.locations = [...user.locations, locationIndex];
-    saveJSON(data);
-    return user;
-  },
-  removeLocation: function(username, locationName) {
-    const data = getJSON();
-    const index = this.getIndex(username);
-    const locationIndex = locationController.getIndex(locationName);
-    if (index < 0 || locationIndex < 0) {
-      return {};
-    }
-    const user = data.users[index];
-    user.locations = user.locations.filter(index => index !== locationIndex);
-    saveJSON(data);
     return user;
   }
 };
