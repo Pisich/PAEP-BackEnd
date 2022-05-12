@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const polizaSchema = new mongoose.Schema({
   filename: {
     type: String,
-    required: true
+    required: false
   },
   productName: {
     type: String,
@@ -16,7 +16,7 @@ const polizaSchema = new mongoose.Schema({
   },
   polizaUrl: {
     type: String,
-    required: true
+    required: false
   },
   asegurado: {
     type: String,

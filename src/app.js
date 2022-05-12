@@ -37,6 +37,7 @@ app.use('/upload', uploadRoute);
 app.use('/user', userRoute);
 app.use('/poliza', polizaRoute);
 app.use('/siniestro', siniestroRoute);
+app.use('/customer', siniestroRoute);
 app.use('/public', express.static(path.join(__dirname, 'public')));
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
@@ -46,7 +47,12 @@ app.get('/', (req, res) => {
   res.send('Hello World!!!');
 });
 
-// NOT WORKING console.log(bitly.getTechnologyQuote('https://paep22-backend.herokuapp.com/'));
+async function calll() {
+  const res = await bitly.getTechnologyQuote('https://paep22-backend.herokuapp.com/');
+  console.log("app.js", res);
+}
+
+//calll();
 
 app.get('/uploader', (req, res) => {
   res.redirect('/public/html/uploader.html');

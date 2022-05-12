@@ -15,4 +15,14 @@ router.get('/:polizaNumber', handleError(async (req, res) => {
   res.send(await polizaController.get(polizaNum));
 }));
 
+// POST poliza
+router.post('/', handleError(async (req, res) => {
+  const body = req.body;
+  const filename = "" || body.filename;
+  const polizaUrl = "" || body.polizaUrl;
+  res.send(await polizaController.create(filename,
+    body.productName, body.polizaNumber, polizaUrl,
+    body.asegurado, body.aseguradora, body.tipo));
+}));
+
 module.exports = router;
