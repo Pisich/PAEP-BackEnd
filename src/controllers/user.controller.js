@@ -4,7 +4,7 @@ const User = require('../models/schemas/Users.js');
 
 const userController = {
   get: async function () {
-    const user = await User.findAll();
+    const user = await User.find();
     return user;
   },
   getByEmail: async function (email) {

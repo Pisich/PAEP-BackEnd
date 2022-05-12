@@ -5,6 +5,10 @@ const Siniestro = require('../models/schemas/Siniestros');
 
 
 const siniestroController = {
+  get: async function () {
+    const siniestro = await Siniestro.find();
+    return siniestro;
+  },
   getByPolizaNumber: async function (num) {
     const siniestro = await Siniestro.findOne({ polizaNumber: num });
     if (siniestro === {} || siniestro === null) throw new NotFoundError(`Poliza number ${num} not associated to any Siniestro`);

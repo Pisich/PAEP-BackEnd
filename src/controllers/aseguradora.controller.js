@@ -5,7 +5,7 @@ const Aseguradora = require('../models/schemas/Aseguradora');
 
 const aseguradoraController = {
   get: async function () {
-    const aseguradora = await Aseguradora.findAll();
+    const aseguradora = await Aseguradora.find();
     return aseguradora;
   },
   getByNombre: async function (nombre) {
