@@ -10,6 +10,7 @@ const bitly = require('./controllers/external.controller');
 const userRoute = require('./routes/user.route');
 const polizaRoute = require('./routes/poliza.route');
 const siniestroRoute = require('./routes/siniestro.route');
+const aseguradoraRoute = require('./routes/aseguradora.route');
 
 require('dotenv').config();
 require('./config/db');
@@ -37,7 +38,8 @@ app.use('/upload', uploadRoute);
 app.use('/user', userRoute);
 app.use('/poliza', polizaRoute);
 app.use('/siniestro', siniestroRoute);
-app.use('/customer', siniestroRoute);
+app.use('/customer', customerRoute);
+app.use('/aseguradora', aseguradoraRoute);
 app.use('/public', express.static(path.join(__dirname, 'public')));
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
@@ -47,12 +49,6 @@ app.get('/', (req, res) => {
   res.send('Hello World!!!');
 });
 
-async function calll() {
-  const res = await bitly.getTechnologyQuote('https://paep22-backend.herokuapp.com/');
-  console.log("app.js", res);
-}
-
-//calll();
 
 app.get('/uploader', (req, res) => {
   res.redirect('/public/html/uploader.html');

@@ -6,7 +6,10 @@ const { NotFoundError } = require('../utils/errors');
 const customerController = require('../controllers/customer.controller');
 
 
-// path prefix /customer
+//GET ALL customers
+router.get('/', handleError(async (req, res) => {
+  res.send(await customerController.get());
+}));
 
 // GET customer/:email
 router.get('/:email', handleError(async (req, res) => {
@@ -27,10 +30,32 @@ router.put('/', handleError(async (req, res) => {
 }));
 
 // POST customer
-router.post('/', urlencodedParser, handleError(async (req, res) => {
+router.post('/', handleError(async (req, res) => {
     const body = req.body;
     res.send(await customerController.create(body.name, body.lastName, body.email,
         body.telefono));
 }));
+
+// DELETE customer
+router.delete('/:email', handleError(async (req, res) => {
+    const {params: email} = req;
+  res.send(await customerController.delete(email));
+}));
+
+//ADD POLIZA
+router.put('/addPoliza/:email', handleError(async (req, res) => {
+    const body = req.body;
+    const numberPoliza = body.numberPoliza || data.numberPoliza;
+    res.send(await customerController.addPoliza(body.email, numberPoliza));
+}));
+
+//REMOVE POLIZA
+router.put('/removePoliza/:email', handleError(async (req, res) => {
+  const body = req.body;
+  const numberPoliza = body.numberPoliza || data.numberPoliza;
+  res.send(await customerController.removePoliza(body.email, numberPoliza));
+}));
+
+
 
 module.exports = router;

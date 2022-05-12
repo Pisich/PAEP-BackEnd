@@ -1,7 +1,7 @@
 const axios = require('axios').default;
 
 class ShortenUrlController {
-  getTechnologyQuote(longLink) {
+  async getTechnologyQuote(longLink) {
     const data = JSON.stringify({
       "long_url": longLink,
       "domain": "bit.ly"
@@ -9,14 +9,16 @@ class ShortenUrlController {
     const config = {
       method: 'post',
       url: 'https://api-ssl.bitly.com/v4/shorten',
-      headers: { 
-        'Authorization': 'Bearer ' + process.env.BITLY_TOKEN, 
+      headers: {
+        'Authorization': 'Bearer ' + process.env.BITLY_TOKEN,
         'Content-Type': 'application/json'
       },
-      data : data
+      data: data
     };
-    return axios(config)
-    .then(response => function() {return Promise.resolve(JSON.stringify(response.data.link))});
+    
+    return await axios(config)
+    .then(r => {return r.data.link})
+    .catch(error => console.error(error));
   }
 };
 

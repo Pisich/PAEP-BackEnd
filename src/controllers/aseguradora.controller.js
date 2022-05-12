@@ -25,20 +25,20 @@ const aseguradoraController = {
     return aseguradora;
   },
   update: async function (nombre, RFC, telefono) {
-    const aseguradora = await Aseguradora.findOne({ nombre: nombre })
+    const aseguradora = await Aseguradora.findOne({ RFC: RFC })
+    let aseg;
     if (aseguradora !== {}) {
-      await Aseguradora.findOneAndUpdate({ nombre: nombre },
+      aseg = await Aseguradora.findOneAndUpdate({ RFC: RFC },
         {
           nombre: nombre,
-          RFC: RFC,
           telefono: telefono
-        });
-    }
-    throw new NotFoundError(`RFC ${RFC} not associated to any account`);
+        }, {returnOriginal: false});
+    } else throw new NotFoundError(`RFC ${RFC} not associated to any account`);
+    return aseg;
   },
   delete: async function (RFC) {
     const aseguradora = await Aseguradora.findOneAndRemove({ RFC: RFC });
-    if (aseguradora === {}) {
+    if (aseguradora === {} || aseguradora === null) {
       throw new NotFoundError(`RFC ${RFC} not associated to any account`);
     }
     return aseguradora;
