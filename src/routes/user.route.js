@@ -9,10 +9,10 @@ const userController = require('../controllers/user.controller');
 // path prefix /user
 
 // GET user/:email
-router.get('/:email', handleError((req, res) => {
+router.get('/:email', handleError(async (req, res) => {
   const { params: email } = req;
   const userEmail = email.email;
-  res.send(userController.getByEmail(userEmail));
+  res.send(await userController.getByEmail(userEmail));
 }));
 
 module.exports = router;
