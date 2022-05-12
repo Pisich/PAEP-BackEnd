@@ -2,6 +2,7 @@ const passport = require('passport');
 const Users = require('../models/schemas/Users');
 const mongoose = require('mongoose');
 const userController = require('../controllers/user.controller');
+const { NotFoundError } = require('../utils/errors');
 
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 
@@ -37,12 +38,14 @@ passport.use(
       let userE;
       try {
         userC = await userController.getByEmail(user.email);
-        done(null, user);
+        console.log('Existing user');
       } catch (NotFoundError) {
+        console.log('Creating user');
         userE = await userController.create(profile.name.givenName,
         profile.name.familyName, 'Desc nula', 'Puesto Nulo', profile._json.picture, profile._json.email);
         console.log("userE", userE);
       }
+      done(null, user);
     }
   )
 );

@@ -6,6 +6,8 @@ const cookieSession = require('cookie-session');
 const authRoute = require('./routes/auth.route');
 const YAML = require('yamljs');
 const cors = require('cors');
+const bitly = require('./controllers/external.controller');
+const userRoute = require('./routes/user.route');
 
 require('dotenv').config();
 require('./config/db');
@@ -25,6 +27,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use('/auth', authRoute);
 app.use('/upload', uploadRoute);
+app.use('/user', userRoute);
 
 app.use(cors());
 app.use(express.json());
@@ -35,10 +38,11 @@ app.get('/', (req, res) => {
   res.send('Hello World!!!');
 });
 
+// NOT WORKING console.log(bitly.getTechnologyQuote('https://paep22-backend.herokuapp.com/'));
+
 app.get('/uploader', (req, res) => {
   res.redirect('/public/html/uploader.html');
 });
-
 
 app.use((err, req, res, next) => {
   console.log('Error', err);

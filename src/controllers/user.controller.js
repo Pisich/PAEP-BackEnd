@@ -10,7 +10,10 @@ const userController = {
   getByEmail: async function (email) {
     const user = await User.findOne({ email: email });
     console.log('user', user);
-    if (user === {}) throw new NotFoundError(`User with email ${email} does not exist`);
+    if (user === null || user === {}){
+      console.log('User not found');
+      throw new NotFoundError(`User with email ${email} does not exist`);
+    }
     return user;
   },
   create: async function (name, lastname, descripcion, puesto, imgLink, email) {
@@ -26,7 +29,7 @@ const userController = {
   },
   update: async function (name, lastname, descripcion, puesto, imgLink) {
     const user = await User.findOne({ email: email });
-    if (polizaa !== {}) {
+    if (user !== null && user !== {}) {
       await Poliza.findOneAndUpdate({ email: email }, {
         name: name,
         lastname: lastname,
@@ -40,7 +43,7 @@ const userController = {
   },
   delete: async function (email) {
     const user = await User.findOneAndRemove({ email: email });
-    if (user === {}) {
+    if (user === null || user === {}) {
       throw new NotFoundError(`User ${email} not associated to any email`);
     }
     return user;
