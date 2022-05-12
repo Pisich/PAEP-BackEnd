@@ -8,6 +8,11 @@ const polizaController = require('../controllers/poliza.controller');
 
 // path prefix /poliza
 
+// GET poliza/
+router.get('/', handleError(async (req, res) => {
+  res.send(await polizaController.getAll());
+}));
+
 // GET poliza/:polizaNumber
 router.get('/:polizaNumber', handleError(async (req, res) => {
   const { params: polizaNumber } = req;

@@ -6,8 +6,12 @@ const Aseguradora = require('../models/schemas/Aseguradora');
 const external = require('../controllers/external.controller');
 
 
-
 const polizaController = {
+  getAll: async function () {
+    const polizaa = await Poliza.find().populate('aseguradora');
+    if (polizaa === {}) throw new NotFoundError(`Poliza number ${num} not associated to any poliza`);
+    return polizaa;
+  },
   get: async function (num) {
     const polizaa = await Poliza.findOne({ polizaNumber: num }).populate('aseguradora');
     if (polizaa === {}) throw new NotFoundError(`Poliza number ${num} not associated to any poliza`);
