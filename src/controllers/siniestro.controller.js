@@ -9,6 +9,11 @@ const siniestroController = {
     const siniestro = await Siniestro.find();
     return siniestro;
   },
+  getByUser: async function (email) {
+    const siniestro = await Siniestro.find({user_email: email});
+    console.log("email:", siniestro);
+    return siniestro;
+  },
   getByPolizaNumber: async function (num) {
     const siniestro = await Siniestro.findOne({ polizaNumber: num });
     if (siniestro === {} || siniestro === null) throw new NotFoundError(`Poliza number ${num} not associated to any Siniestro`);

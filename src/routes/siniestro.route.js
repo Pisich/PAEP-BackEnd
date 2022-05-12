@@ -12,10 +12,10 @@ const siniestroController = require('../controllers/siniestro.controller');
 
 // GET siniestro/last24hrs
 router.get('/last24hrs', handleError(async (req, res) => {
-  let siniestros = await siniestroController.get();
+  let siniestros = await siniestroController.getByUser(req.user);
   let sin24hr = [];
   for (const i of siniestros) {
-    if ((Date.now() - parseInt(i.fecha)) <= 86400) sin24hr.push(i);
+    if ((Date.now() - parseInt(i.fecha)) <= 86400000) sin24hr.push(i);
   }
   res.send(sin24hr);
 }));
