@@ -13,7 +13,7 @@ router.get('/google/callback',
   function (req, res) {
     console.log(req.query.code);
     console.log('Logged in successfully!');
-    res.redirect('/');
+    return res.redirect('https://mis-seguros.herokuapp.com/#/dashboard');
   }
 );
 
