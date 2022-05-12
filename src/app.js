@@ -8,6 +8,7 @@ const YAML = require('yamljs');
 const cors = require('cors');
 const bitly = require('./controllers/external.controller');
 const userRoute = require('./routes/user.route');
+const polizaRoute = require('./routes/poliza.route');
 
 require('dotenv').config();
 require('./config/db');
@@ -28,6 +29,7 @@ app.use(passport.session());
 app.use('/auth', authRoute);
 app.use('/upload', uploadRoute);
 app.use('/user', userRoute);
+app.use('/poliza', polizaRoute);
 
 app.use(cors());
 app.use(express.json());

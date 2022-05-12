@@ -5,7 +5,7 @@ const polizaController = require('../controllers/poliza.controller');
 
 router.post('/poliza', uploadGCS.single('poliza'), async (req, res) => {
   console.log(req.file);
-  await polizaController.create(req.file.filename, 'Poliza Basica', Date.now(), req.file.path);
+  await polizaController.create(req.file.filename, 'Poliza Basica', Date.now(), req.file.path, req.user, 'AseguradoraABC', 'Tipo');
   res.redirect('/');
 });
 

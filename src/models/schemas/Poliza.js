@@ -34,7 +34,10 @@ const polizaSchema = new mongoose.Schema({
     type: Boolean,
     default: true
   },
-
+  fechaVencimiento: {
+    type: String,
+    required: true
+  }
 });
 
 const Poliza = mongoose.model('Poliza', polizaSchema);
