@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const siniestroSchema = new mongoose.Schema({
-    username: {
+    user_email: {
         type: String,
         required: true
     },
@@ -16,6 +16,14 @@ const siniestroSchema = new mongoose.Schema({
     notas: {
         type: String,
         required: false
+    },
+    polizaNumber: {
+        type: String,
+        required: true
+    },
+    fecha: {
+        type: String,
+        required: true
     }
 });
 

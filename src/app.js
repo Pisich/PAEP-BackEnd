@@ -9,6 +9,7 @@ const cors = require('cors');
 const bitly = require('./controllers/external.controller');
 const userRoute = require('./routes/user.route');
 const polizaRoute = require('./routes/poliza.route');
+const siniestroRoute = require('./routes/siniestro.route');
 
 require('dotenv').config();
 require('./config/db');
@@ -24,17 +25,22 @@ app.use(cookieSession({
   maxAge: 24 * 60 * 60 * 1000,
   keys: ['clave'] //clave para encriptar
 }));
+
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
+
 app.use(passport.initialize());
 app.use(passport.session());
 app.use('/auth', authRoute);
 app.use('/upload', uploadRoute);
 app.use('/user', userRoute);
 app.use('/poliza', polizaRoute);
-
-app.use(cors());
-app.use(express.json());
+app.use('/siniestro', siniestroRoute);
 app.use('/public', express.static(path.join(__dirname, 'public')));
-app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument))
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
+
 
 app.get('/', (req, res) => {
   res.send('Hello World!!!');
