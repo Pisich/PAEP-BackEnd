@@ -1,14 +1,14 @@
 const { NotFoundError } = require('../utils/errors');
 
-const User = require('../models/schemas/Users.js');
+const Users = require('../models/schemas/Users.js');
 
 const userController = {
   get: async function () {
-    const user = await User.find();
+    const user = await Users.find();
     return user;
   },
   getByEmail: async function (email) {
-    const user = await User.findOne({ email: email });
+    const user = await Users.findOne({ email: email });
     console.log('user', user);
     if (user === null || user === {}){
       console.log('User not found');
@@ -17,7 +17,7 @@ const userController = {
     return user;
   },
   create: async function (name, lastname, descripcion, puesto, imgLink, email) {
-    const user = await User.create({
+    const user = await Users.create({
       name: name,
       lastname: lastname,
       descripcion: descripcion,
@@ -27,22 +27,23 @@ const userController = {
     });
     return user;
   },
-  update: async function (name, lastname, descripcion, puesto, imgLink) {
-    const user = await User.findOne({ email: email });
+  update: async function (name, lastname, descripcion, puesto, imgLink, email) {
+    const user = await Users.findOne({ email: email });
+    let new_user;
     if (user !== null && user !== {}) {
-      await Poliza.findOneAndUpdate({ email: email }, {
+      new_user = await Users.findOneAndUpdate({ email: email }, {
         name: name,
         lastname: lastname,
         descripcion: descripcion,
         puesto: puesto,
         imgLink: imgLink,
         email: email
-      }, { useFindAndModify: false });
-    }
-    throw new NotFoundError(`User ${email} not associated to any email`);
+      }, {returnOriginal: false});
+    } else throw new NotFoundError(`User ${email} not associated to any email`);
+    return new_user;
   },
   delete: async function (email) {
-    const user = await User.findOneAndRemove({ email: email });
+    const user = await Users.findOneAndRemove({ email: email });
     if (user === null || user === {}) {
       throw new NotFoundError(`User ${email} not associated to any email`);
     }
