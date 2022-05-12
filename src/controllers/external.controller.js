@@ -1,7 +1,7 @@
 const axios = require('axios').default;
 
 class ShortenUrlController {
-  async getTechnologyQuote(longLink) {
+  async getShortenUrl(longLink) {
     const data = JSON.stringify({
       "long_url": longLink,
       "domain": "bit.ly"

@@ -25,4 +25,11 @@ router.post('/', handleError(async (req, res) => {
     body.asegurado, body.aseguradora, body.tipo));
 }));
 
+//POST poliza/linkAseguradora
+router.post('/linkAseguradora/:nombre', handleError(async (req, res) => {
+  const { params: nombre } = req;
+  const body = req.body;
+  const nom = nombre.nombre;
+  res.send(await polizaController.link(nom, body.polizaNumber));
+}));
 module.exports = router;

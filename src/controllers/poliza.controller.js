@@ -3,11 +3,13 @@ const mongoose = require('mongoose');
 
 const Poliza = require('../models/schemas/Poliza');
 const Aseguradora = require('../models/schemas/Aseguradora');
+const external = require('../controllers/external.controller');
+
 
 
 const polizaController = {
   get: async function (num) {
-    const polizaa = await Poliza.findOne({ polizaNumber: num });
+    const polizaa = await Poliza.findOne({ polizaNumber: num }).populate('aseguradora');
     if (polizaa === {}) throw new NotFoundError(`Poliza number ${num} not associated to any poliza`);
     return polizaa;
   },
@@ -18,7 +20,7 @@ const polizaController = {
       filename: filename,
       productName: productName,
       polizaNumber: polizaNumber,
-      polizaUrl: polizaUrl,
+      polizaUrl: polizaUrl != "" ? await external.getShortenUrl(polizaUrl) : polizaUrl,
       asegurado: asegurado,
       aseguradora: aseguradoraRef,
       tipo: tipo,
@@ -39,7 +41,7 @@ const polizaController = {
         asegurado: asegurado,
         aseguradora: aseguradoraRef,
         tipo: tipo
-      }, { useFindAndModify: false });
+      }, { useFindAndModify: false }, {returnOriginal: false}).populate('aseguradora');
     }
     throw new NotFoundError(`Poliza number ${num} not associated to any poliza`);
   },
@@ -49,6 +51,13 @@ const polizaController = {
       throw new NotFoundError(`Poliza number ${num} not associated to any poliza`);
     }
     return polizaa;
+  },
+  link: async function(nombreAseguradora, polizaNumber) {
+    const aseg = await Aseguradora.findOne({nombre: nombreAseguradora});
+    if (aseg === null || aseg === {}) throw new NotFoundError(`Not found: ${nombreAseguradora}`);
+    const poliza = Poliza.findOneAndUpdate({polizaNumber: polizaNumber},
+      {aseguradora: aseg}, {returnOriginal: false});
+    return poliza;
   }
 };
 

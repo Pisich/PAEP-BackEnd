@@ -38,22 +38,27 @@ router.post('/', handleError(async (req, res) => {
 
 // DELETE customer
 router.delete('/:email', handleError(async (req, res) => {
-    const {params: email} = req;
-  res.send(await customerController.delete(email));
+  const {params: email} = req;
+  const emaill = email.email;
+  res.send(await customerController.delete(emaill));
 }));
 
 //ADD POLIZA
 router.put('/addPoliza/:email', handleError(async (req, res) => {
+  const {params: email} = req;
     const body = req.body;
-    const numberPoliza = body.numberPoliza || data.numberPoliza;
-    res.send(await customerController.addPoliza(body.email, numberPoliza));
+    const emaill = email.email;
+    const numberPoliza = body.numberPoliza;
+    res.send(await customerController.addPoliza(emaill, numberPoliza));
 }));
 
 //REMOVE POLIZA
 router.put('/removePoliza/:email', handleError(async (req, res) => {
+  const {params: email} = req;
   const body = req.body;
-  const numberPoliza = body.numberPoliza || data.numberPoliza;
-  res.send(await customerController.removePoliza(body.email, numberPoliza));
+  const emaill = email.email;
+  const numberPoliza = body.numberPoliza;
+  res.send(await customerController.removePoliza(emaill, numberPoliza));
 }));
 
 

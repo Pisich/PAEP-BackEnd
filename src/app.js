@@ -11,6 +11,7 @@ const userRoute = require('./routes/user.route');
 const polizaRoute = require('./routes/poliza.route');
 const siniestroRoute = require('./routes/siniestro.route');
 const aseguradoraRoute = require('./routes/aseguradora.route');
+const customerRoute = require('./routes/customer.route');
 
 require('dotenv').config();
 require('./config/db');
