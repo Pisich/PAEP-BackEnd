@@ -1,18 +1,18 @@
 const passport = require('passport');
-const Customer = require('../models/schemas/Customer');
+const Users = require('../models/schemas/Users');
 const mongoose = require('mongoose');
-const customerController = require('../controllers/customer.controller');
+const userController = require('../controllers/user.controller');
 
 const GoogleStrategy = require('passport-google-oauth20').Strategy;
 
-passport.serializeUser(function (customer, done) {
+passport.serializeUser(function (user, done) {
   console.log('Serializing user');
-  done(null, customer.email);
+  done(null, user.email);
 });
 
 passport.deserializeUser(function (email, done) {
-  customerController.get(email)
-    .then(customer => done(null, email))
+  userController.getByEmail(email)
+    .then(user => done(null, email))
     .catch(err => done(err));
 });
 
@@ -24,16 +24,25 @@ passport.use(
     },
     async function (accessToken, refreshToken, profile, done) {
       console.log('Working...');
-      const customer = {
+      const user = {
         name: profile.name.givenName,
-        lastName: profile.name.familyName,
+        lastname: profile.name.familyName,
         email: profile._json.email,
-        telefono: 'none'
+        puesto: 'Puesto nulo',
+        descripcion: 'Desc nula',
+        imgLink: profile._json.picture,
+        active: true
       };
-      customerController.get(customer.email)
-        .then(customer2 => done(null, customer))
-        .catch(err => customerController.create(profile.name.givenName,
-          profile.name.familyName, profile._json.email, 'none'));
+      let userC;
+      let userE;
+      try {
+        userC = await userController.getByEmail(user.email);
+        done(null, user);
+      } catch (NotFoundError) {
+        userE = await userController.create(profile.name.givenName,
+        profile.name.familyName, 'Desc nula', 'Puesto Nulo', profile._json.picture, profile._json.email);
+        console.log("userE", userE);
+      }
     }
   )
 );

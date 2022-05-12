@@ -7,6 +7,12 @@ const userController = {
     const user = await User.findAll();
     return user;
   },
+  getByEmail: async function (email) {
+    const user = await User.findOne({ email: email });
+    console.log('user', user);
+    if (user === {}) throw new NotFoundError(`User with email ${email} does not exist`);
+    return user;
+  },
   create: async function (name, lastname, descripcion, puesto, imgLink, email) {
     const user = await User.create({
       name: name,
