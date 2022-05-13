@@ -1,7 +1,6 @@
 const express = require('express');
 const router = express.Router();
 const bodyParser = require('body-parser');
-const urlencodedParser = bodyParser.urlencoded({extended: false});
 
 const {handleError} = require('../utils/hof');
 const {NotFoundError} = require('../utils/errors');
@@ -12,7 +11,7 @@ const siniestroController = require('../controllers/siniestro.controller');
 
 // GET siniestro/last24hrs
 router.get('/last24hrs', handleError(async (req, res) => {
-  let siniestros = await siniestroController.getByUser(req.user);
+  let siniestros = await siniestroController.get();
   let sin24hr = [];
   for (const i of siniestros) {
     if ((Date.now() - parseInt(i.fecha)) <= 86400000) sin24hr.push(i);
@@ -27,7 +26,7 @@ router.get('/:polizaNum', handleError(async (req, res) => {
 }));
 
 // POST siniestro
-router.post('/', urlencodedParser, handleError(async (req, res) => {
+router.post('/', handleError(async (req, res) => {
   const body = req.body;
   res.send(await siniestroController.create(body.user_email, body.polizaTipo, body.polizaNombre,
     body.notas, body.polizaNumber));
