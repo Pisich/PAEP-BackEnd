@@ -18,7 +18,7 @@ const polizaController = {
     return polizaa;
   },
   create: async function (filename, productName, polizaNumber, polizaUrl, asegurado, aseguradora, tipo) {
-    const aseguradoraRef = await Aseguradora.findOne({ polizaNumber: aseguradora });
+    const aseguradoraRef = await Aseguradora.findOne({ aseguradora: aseguradora });
     const venc = Date.now() + 432000000;
     const polizaa = await Poliza.create({
       filename: filename,
@@ -35,7 +35,7 @@ const polizaController = {
   },
   update: async function (filename, productName, polizaNumber, polizaUrl, asegurado, aseguradora, tipo) {
     const polizaa = await Poliza.findOne({ polizaNumber: polizaNumber });
-    const aseguradoraRef = await Aseguradora.findOne({ polizaNumber: aseguradora });
+    const aseguradoraRef = await Aseguradora.findOne({ nombre: aseguradora });
     if (polizaa !== {}) {
       await Poliza.findOneAndUpdate({ polizaNumber: polizaNumber }, {
         filename: filename,
@@ -62,6 +62,18 @@ const polizaController = {
     const poliza = Poliza.findOneAndUpdate({polizaNumber: polizaNumber},
       {aseguradora: aseg}, {returnOriginal: false});
     return poliza;
+  },
+  addCampos: async function(polizaNumber, productName, asegurado, aseguradora, tipo) {
+    const polizaa = await Poliza.findOne({ polizaNumber: polizaNumber });
+    const aseguradoraRef = await Aseguradora.findOne({ nombre: aseguradora });
+    if (polizaa !== {} && polizaa !== null) {
+      await Poliza.findOneAndUpdate({ polizaNumber: polizaNumber }, {
+        productName: productName,
+        asegurado: asegurado,
+        aseguradora: aseguradoraRef,
+        tipo: tipo
+      }, {returnOriginal: false}).populate('aseguradora');
+  }
   }
 };
 

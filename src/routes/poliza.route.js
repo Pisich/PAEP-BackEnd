@@ -37,4 +37,15 @@ router.post('/linkAseguradora/:nombre', handleError(async (req, res) => {
   const nom = nombre.nombre;
   res.send(await polizaController.link(nom, body.polizaNumber));
 }));
+
+//POST poliza/addCampos
+router.post('/addCampos/:polizaNumber', handleError(async (req, res) => {
+  const { params: polizaNumber } = req;
+  const num = polizaNumber.polizaNumber;
+  const body = req.body;
+  
+  res.send(await polizaController.addCampos(num, body.productName, body.asegurado,
+    body.aseguradora, body.tipo));
+}));
+
 module.exports = router;
