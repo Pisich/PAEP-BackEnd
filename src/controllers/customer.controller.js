@@ -9,13 +9,13 @@ const Users = require('../models/schemas/Users');
 const customerController = {
 
   get: async function () {
-    const customer = await Customer.find().populate('aseguradora');
+    const customer = await Customer.find().populate('polizas');
     return customer;
   },
   getByEmail: async function (email) {
     const customer = await Customer.findOne({
       email: email
-    }).populate('aseguradora');
+    }).populate('polizas');
     if (customer === null) throw new NotFoundError(`email ${email} not associated to any account`);
     return customer;
   },
