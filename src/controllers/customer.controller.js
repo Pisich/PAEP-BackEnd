@@ -75,6 +75,7 @@ const customerController = {
         polizas: poliza
       }
     });
+    return poliza;
   },
   removePoliza: async function (email, polizaNum) {
     const poliza = await Poliza.findOne({
@@ -88,6 +89,8 @@ const customerController = {
         polizas: poliza._id
       }
     });
+    return poliza;
+
   }
 };
 
