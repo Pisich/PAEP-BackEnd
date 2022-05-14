@@ -47,7 +47,7 @@ const customerController = {
           lastName: lastName,
           email: email,
           telefono: telefono
-        }, { useFindAndModify: false }, { returnOriginal: false });
+        }, { returnOriginal: false });
     }
     else {
       throw new NotFoundError(`email ${email} not associated to any account`);
