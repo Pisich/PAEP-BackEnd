@@ -40,11 +40,14 @@ const customerController = {
     })
     if (customer !== null) {
       await Customer.findOneAndUpdate({
-        name: name,
-        lastName: lastName,
-        email: email,
-        telefono: telefono
-      });
+        name: name
+      },
+        {
+          name: name,
+          lastName: lastName,
+          email: email,
+          telefono: telefono
+        }, { useFindAndModify: false }, { returnOriginal: false });
     }
     else {
       throw new NotFoundError(`email ${email} not associated to any account`);
