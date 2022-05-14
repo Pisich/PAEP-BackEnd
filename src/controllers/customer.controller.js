@@ -38,8 +38,9 @@ const customerController = {
     const customer = await Customer.findOne({
       email: email
     })
+    let updated;
     if (customer !== null) {
-      await Customer.findOneAndUpdate({
+      updated = await Customer.findOneAndUpdate({
         name: name
       },
         {
@@ -52,6 +53,7 @@ const customerController = {
     else {
       throw new NotFoundError(`email ${email} not associated to any account`);
     }
+    return updated;
   },
   delete: async function (email) {
     const customer = await Customer.findOneAndRemove({
