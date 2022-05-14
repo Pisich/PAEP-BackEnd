@@ -39,17 +39,16 @@ const customerController = {
       email: email
     })
     if (customer !== null) {
-      await Customer.findOneAndRemove({
-        email: email
-      });
-      await Customer.create({
+      await Customer.findOneAndUpdate({
         name: name,
         lastName: lastName,
         email: email,
         telefono: telefono
-      })
+      });
     }
-    throw new NotFoundError(`email ${email} not associated to any account`);
+    else {
+      throw new NotFoundError(`email ${email} not associated to any account`);
+    }
   },
   delete: async function (email) {
     const customer = await Customer.findOneAndRemove({
