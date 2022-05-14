@@ -24,7 +24,7 @@ router.put('/', handleError(async (req, res) => {
   const data = customerController.getByEmail(body.email);
   const name = body.name || data.name;
   const lastname = body.lastName || data.lastName;
-  const telefono = body.descripcion || data.telefono;
+  const telefono = body.telefono || data.telefono;
 
   res.send(await customerController.update(name, lastname, body.email, telefono));
 }));
