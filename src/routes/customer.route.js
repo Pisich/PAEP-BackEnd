@@ -21,7 +21,7 @@ router.get('/:email', handleError(async (req, res) => {
 //PUT customer
 router.put('/', handleError(async (req, res) => {
   const body = req.body;
-  const data = customerController.getByEmail(body.email);
+  const data = await customerController.getByEmail(body.email);
   const name = body.name || data.name;
   const lastname = body.lastName || data.lastName;
   const telefono = body.telefono || data.telefono;
