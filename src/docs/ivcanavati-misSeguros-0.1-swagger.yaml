@@ -1,0 +1,816 @@
+swagger: '2.0'
+info:
+  description: defaultDescription
+  version: '0.1'
+  title: defaultTitle
+paths:
+  /poliza:
+    post:
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/Model7'
+          x-examples:
+            application/json: |2-
+                  {
+                      "filename": "",
+                      "productName": "Poliza SWAGGER",
+                      "polizaNumber": "1652546810381",
+                      "polizaUrl": "",
+                      "asegurado": "Carla S",
+                      "aseguradora": "Aseguradora Lopez",
+                      "tipo": "Poliza Terceros"
+                  }
+      responses:
+        '200':
+          description: Definition generated from Swagger Inspector
+          schema:
+            $ref: '#/definitions/Model19'
+    put:
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/Model8'
+          x-examples:
+            application/json: |2-
+                  {
+                      "filename": "",
+                      "productName": "Poliza Test Documentacion UPDATED",
+                      "polizaNumber": "1652546810381",
+                      "polizaUrl": "",
+                      "asegurado": "Usuario de Documentacion",
+                      "aseguradora": "Aseguradora Lopez",
+                      "tipo": "Poliza Terceros"
+                  }
+      responses:
+        '200':
+          description: Definition generated from Swagger Inspector
+          schema:
+            $ref: '#/definitions/Model20'
+    delete:
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/Model9'
+          x-examples:
+            application/json: |2-
+                  {
+                      "polizaNumber": "1652546810381"
+                  }
+      responses:
+        '200':
+          description: Definition generated from Swagger Inspector
+          schema:
+            $ref: '#/definitions/Model21'
+  /aseguradora:
+    post:
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/Model0'
+          x-examples:
+            application/json: |2-
+                  {
+                      "nombre": "TEST Documentacion SWAGGER",
+                      "RFC": "AAAA000000A00",
+                      "telefono": "3316548965"
+                  }
+      responses:
+        '200':
+          description: Definition generated from Swagger Inspector
+          schema:
+            $ref: '#/definitions/Model13'
+    put:
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/Model1'
+          x-examples:
+            application/json: |2-
+                  {
+                      "nombre": "Aseguradora",
+                      "RFC": "FFF",
+                      "telefono": "444"
+                  }
+      responses:
+        '200':
+          description: Definition generated from Swagger Inspector
+          schema:
+            $ref: '#/definitions/Model22'
+  /siniestro:
+    post:
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/Model6'
+          x-examples:
+            application/json: |-
+              {
+                  "user_email": "albert@menique.com",
+                  "polizaTipo": "Gastos Fuertes",
+                  "polizaNombre": "Poliza Generica de Prueba",
+                  "notas": " test swager",
+                  "polizaNumber": "1652550869952"
+              }
+      responses:
+        '200':
+          description: Definition generated from Swagger Inspector
+          schema:
+            $ref: '#/definitions/Model15'
+  /customer:
+    get:
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Definition generated from Swagger Inspector
+          schema:
+            $ref: '#/definitions/Model16'
+    post:
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/Model3'
+          x-examples:
+            application/json: |-
+              {
+                  "name": "Ivan",
+                  "lastName": "Canavati",
+                  "email": "ivan@gmail.com",
+                  "telefono": "3334313545"
+              }
+      responses:
+        '200':
+          description: Definition generated from Swagger Inspector
+          schema:
+            $ref: '#/definitions/Model17'
+    put:
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/Model4'
+          x-examples:
+            application/json: |-
+              {
+                  "name": "Ivan",
+                  "lastName": "Canavati Alatore",
+                  "email": "ivan@gmail.com",
+                  "telefono": "3318930469"
+              }
+      responses:
+        '200':
+          description: Definition generated from Swagger Inspector
+          schema:
+            $ref: '#/definitions/Model18'
+  /aseguradora/RFC:
+    delete:
+      consumes:
+        - application/json
+      produces:
+        - text/html
+      parameters: []
+      responses:
+        '404':
+          description: Definition generated from Swagger Inspector
+          schema:
+            type: string
+  /poliza/numberPoliza:
+    get:
+      produces:
+        - application/json
+      parameters: []
+      responses:
+        '200':
+          description: Definition generated from Swagger Inspector
+          schema:
+            $ref: '#/definitions/Model24'
+  /siniestro/numberPoliza:
+    get:
+      produces:
+        - application/json
+      parameters: []
+      responses:
+        '200':
+          description: Definition generated from Swagger Inspector
+          schema:
+            $ref: '#/definitions/Model25'
+  /customer/email:
+    delete:
+      consumes:
+        - application/json
+      produces:
+        - text/html
+      parameters:
+        - in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/Model5'
+          x-examples:
+            application/json: |-
+              {
+                  "numberPoliza": "1652546810381"
+              }
+      responses:
+        '404':
+          description: Definition generated from Swagger Inspector
+          schema:
+            type: string
+  /aseguradora/name:
+    get:
+      produces:
+        - application/json
+        - text/html
+      responses:
+        '200':
+          description: Definition generated from Swagger Inspector
+          schema:
+            $ref: '#/definitions/Model22'
+        '404':
+          description: Definition generated from Swagger Inspector
+          schema:
+            type: string
+  /customer/email:
+    get:
+      produces:
+        - application/json
+        - text/html
+      responses:
+        '200':
+          description: Definition generated from Swagger Inspector
+          schema:
+            $ref: '#/definitions/Model16'
+        '404':
+          description: Definition generated from Swagger Inspector
+          schema:
+            type: string
+  /customer/addPoliza/ivan@gmail.com:
+    put:
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/Model10'
+          x-examples:
+            application/json: |-
+              {
+                  "numberPoliza": "1652546810381"
+              }
+      responses:
+        '200':
+          description: Definition generated from Swagger Inspector
+          schema:
+            $ref: '#/definitions/Model26'
+  /customer/removePoliza/ivan@gmail.com:
+    put:
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: body
+          required: false
+          schema:
+            $ref: '#/definitions/Model10'
+          x-examples:
+            application/json: |-
+              {
+                  "numberPoliza": "1652546810381"
+              }
+      responses:
+        '200':
+          description: Definition generated from Swagger Inspector
+          schema:
+            $ref: '#/definitions/Model26'
+definitions:
+  Model0:
+    properties:
+      nombre:
+        type: string
+      RFC:
+        type: string
+      telefono:
+        type: string
+  Model1:
+    properties:
+      nombre:
+        type: string
+      RFC:
+        type: string
+      telefono:
+        type: string
+  Model3:
+    properties:
+      name:
+        type: string
+      lastName:
+        type: string
+      email:
+        type: string
+      telefono:
+        type: string
+  Model4:
+    properties:
+      name:
+        type: string
+      lastName:
+        type: string
+      email:
+        type: string
+      telefono:
+        type: string
+  Model5:
+    properties:
+      numberPoliza:
+        type: string
+  Model6:
+    properties:
+      user_email:
+        type: string
+      polizaTipo:
+        type: string
+      polizaNombre:
+        type: string
+      notas:
+        type: string
+      polizaNumber:
+        type: string
+  Model7:
+    properties:
+      filename:
+        type: string
+      productName:
+        type: string
+      polizaNumber:
+        type: string
+      polizaUrl:
+        type: string
+      asegurado:
+        type: string
+      aseguradora:
+        type: string
+      tipo:
+        type: string
+  Model8:
+    properties:
+      filename:
+        type: string
+      productName:
+        type: string
+      polizaNumber:
+        type: string
+      polizaUrl:
+        type: string
+      asegurado:
+        type: string
+      aseguradora:
+        type: string
+      tipo:
+        type: string
+  Model9:
+    properties:
+      polizaNumber:
+        type: string
+  Model10:
+    properties:
+      numberPoliza:
+        type: string
+  Aseguradora:
+    properties:
+      _id:
+        type: string
+      nombre:
+        type: string
+      RFC:
+        type: string
+      telefono:
+        type: string
+      __v:
+        type: integer
+        format: int32
+  Array:
+    properties:
+      _id:
+        type: string
+      filename:
+        type: string
+      productName:
+        type: string
+      polizaNumber:
+        type: string
+      polizaUrl:
+        type: string
+      asegurado:
+        type: string
+      aseguradora:
+        $ref: '#/definitions/Aseguradora'
+      tipo:
+        type: string
+      active:
+        type: boolean
+      fechaVencimiento:
+        type: string
+      __v:
+        type: integer
+        format: int32
+  Model12_Array:
+    properties:
+      _id:
+        type: string
+      nombre:
+        type: string
+      RFC:
+        type: string
+      telefono:
+        type: string
+      __v:
+        type: integer
+        format: int32
+  Model13:
+    properties:
+      nombre:
+        type: string
+      RFC:
+        type: string
+      telefono:
+        type: string
+      _id:
+        type: string
+      __v:
+        type: integer
+        format: int32
+  Model14_Aseguradora:
+    properties:
+      _id:
+        type: string
+      nombre:
+        type: string
+      RFC:
+        type: string
+      telefono:
+        type: string
+      __v:
+        type: integer
+        format: int32
+  Model14:
+    properties:
+      filename:
+        type: string
+      productName:
+        type: string
+      polizaNumber:
+        type: string
+      polizaUrl:
+        type: string
+      asegurado:
+        type: string
+      aseguradora:
+        $ref: '#/definitions/Model14_Aseguradora'
+      tipo:
+        type: string
+      active:
+        type: boolean
+      fechaVencimiento:
+        type: string
+      _id:
+        type: string
+      __v:
+        type: integer
+        format: int32
+  Model15:
+    properties:
+      user_email:
+        type: string
+      polizaTipo:
+        type: string
+      polizaNombre:
+        type: string
+      notas:
+        type: string
+      polizaNumber:
+        type: string
+      fecha:
+        type: string
+      _id:
+        type: string
+      __v:
+        type: integer
+        format: int32
+  Model16_Array:
+    properties:
+      _id:
+        type: string
+      name:
+        type: string
+      lastName:
+        type: string
+      email:
+        type: string
+      telefono:
+        type: string
+      polizas:
+        type: array
+      __v:
+        type: integer
+        format: int32
+  Model16:
+    type: array
+    items:
+      $ref: '#/definitions/Model16_Array'
+  Model17:
+    properties:
+      name:
+        type: string
+      lastName:
+        type: string
+      email:
+        type: string
+      telefono:
+        type: string
+      polizas:
+        type: array
+      _id:
+        type: string
+      __v:
+        type: integer
+        format: int32
+  Model18:
+    properties:
+      _id:
+        type: string
+      name:
+        type: string
+      lastName:
+        type: string
+      email:
+        type: string
+      telefono:
+        type: string
+      polizas:
+        type: array
+      __v:
+        type: integer
+        format: int32
+  Model19_Aseguradora:
+    properties:
+      _id:
+        type: string
+      nombre:
+        type: string
+      RFC:
+        type: string
+      telefono:
+        type: string
+      __v:
+        type: integer
+        format: int32
+  Model19:
+    properties:
+      filename:
+        type: string
+      productName:
+        type: string
+      polizaNumber:
+        type: string
+      polizaUrl:
+        type: string
+      asegurado:
+        type: string
+      aseguradora:
+        $ref: '#/definitions/Model19_Aseguradora'
+      tipo:
+        type: string
+      active:
+        type: boolean
+      fechaVencimiento:
+        type: string
+      _id:
+        type: string
+      __v:
+        type: integer
+        format: int32
+  Model20_Aseguradora:
+    properties:
+      _id:
+        type: string
+      nombre:
+        type: string
+      RFC:
+        type: string
+      telefono:
+        type: string
+      __v:
+        type: integer
+        format: int32
+  Model20:
+    properties:
+      _id:
+        type: string
+      filename:
+        type: string
+      productName:
+        type: string
+      polizaNumber:
+        type: string
+      polizaUrl:
+        type: string
+      asegurado:
+        type: string
+      aseguradora:
+        $ref: '#/definitions/Model20_Aseguradora'
+      tipo:
+        type: string
+      active:
+        type: boolean
+      fechaVencimiento:
+        type: string
+      __v:
+        type: integer
+        format: int32
+  Model21:
+    properties:
+      _id:
+        type: string
+      filename:
+        type: string
+      productName:
+        type: string
+      polizaNumber:
+        type: string
+      polizaUrl:
+        type: string
+      asegurado:
+        type: string
+      aseguradora:
+        type: string
+      tipo:
+        type: string
+      active:
+        type: boolean
+      fechaVencimiento:
+        type: string
+      __v:
+        type: integer
+        format: int32
+  Model22:
+    properties:
+      _id:
+        type: string
+      nombre:
+        type: string
+      RFC:
+        type: string
+      telefono:
+        type: string
+      __v:
+        type: integer
+        format: int32
+  Model23:
+    properties:
+      _id:
+        type: string
+      nombre:
+        type: string
+      RFC:
+        type: string
+      telefono:
+        type: string
+      __v:
+        type: integer
+        format: int32
+  Model24_Aseguradora:
+    properties:
+      _id:
+        type: string
+      nombre:
+        type: string
+      RFC:
+        type: string
+      telefono:
+        type: string
+      __v:
+        type: integer
+        format: int32
+  Model24:
+    properties:
+      _id:
+        type: string
+      filename:
+        type: string
+      productName:
+        type: string
+      polizaNumber:
+        type: string
+      polizaUrl:
+        type: string
+      asegurado:
+        type: string
+      aseguradora:
+        $ref: '#/definitions/Model24_Aseguradora'
+      tipo:
+        type: string
+      active:
+        type: boolean
+      fechaVencimiento:
+        type: string
+      __v:
+        type: integer
+        format: int32
+  Model25:
+    properties:
+      _id:
+        type: string
+      user_email:
+        type: string
+      polizaTipo:
+        type: string
+      polizaNombre:
+        type: string
+      notas:
+        type: string
+      polizaNumber:
+        type: string
+      fecha:
+        type: string
+      __v:
+        type: integer
+        format: int32
+  Model26:
+    properties:
+      _id:
+        type: string
+      filename:
+        type: string
+      productName:
+        type: string
+      polizaNumber:
+        type: string
+      polizaUrl:
+        type: string
+      asegurado:
+        type: string
+      aseguradora:
+        type: string
+      tipo:
+        type: string
+      active:
+        type: boolean
+      fechaVencimiento:
+        type: string
+      __v:
+        type: integer
+        format: int32

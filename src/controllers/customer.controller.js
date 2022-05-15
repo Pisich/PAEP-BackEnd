@@ -41,7 +41,7 @@ const customerController = {
     let updated;
     if (customer !== null) {
       updated = await Customer.findOneAndUpdate({
-        name: name
+        email: email
       },
         {
           name: name,
