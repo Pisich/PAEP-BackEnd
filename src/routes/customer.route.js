@@ -22,9 +22,9 @@ router.get('/:email', handleError(async (req, res) => {
 router.put('/', handleError(async (req, res) => {
   const body = req.body;
   const data = await customerController.getByEmail(body.email);
-  const name = body.name != null ? body.name : data.name;
-  const lastname = body.lastName != null ? body.lastName : data.lastName;
-  const telefono = body.telefono != null ? body.telefono : data.telefono;
+  const name = body.name != null || !body.name.equals("") ? body.name : data.name;
+  const lastname = body.lastName != null || !body.lastName.equals("") ? body.lastName : data.lastName;
+  const telefono = body.telefono != null || !body.telefono.equals("") ? body.telefono : data.telefono;
 
   res.send(await customerController.update(name, lastname, body.email, telefono));
 }));
