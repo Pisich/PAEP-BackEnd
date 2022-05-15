@@ -12,7 +12,8 @@ const polizaSchema = new mongoose.Schema({
   },
   polizaNumber: {
     type: String,
-    required: true
+    required: true,
+    unique: true
   },
   polizaUrl: {
     type: String,
