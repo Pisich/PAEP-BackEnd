@@ -34,10 +34,11 @@ const polizaController = {
     return polizaa;
   },
   update: async function (filename, productName, polizaNumber, polizaUrl, asegurado, aseguradora, tipo) {
+    let updated;
     const polizaa = await Poliza.findOne({ polizaNumber: polizaNumber });
     const aseguradoraRef = await Aseguradora.findOne({ nombre: aseguradora });
     if (polizaa !== {}) {
-      await Poliza.findOneAndUpdate({ polizaNumber: polizaNumber }, {
+      updated = await Poliza.findOneAndUpdate({ polizaNumber: polizaNumber }, {
         filename: filename,
         productName: productName,
         polizaNumber: polizaNumber,
@@ -45,9 +46,12 @@ const polizaController = {
         asegurado: asegurado,
         aseguradora: aseguradoraRef,
         tipo: tipo
-      }, { useFindAndModify: false }, {returnOriginal: false}).populate('aseguradora');
+      }, { returnOriginal: false }).populate('aseguradora');
     }
-    throw new NotFoundError(`Poliza number ${num} not associated to any poliza`);
+    else {
+      throw new NotFoundError(`Poliza number ${num} not associated to any poliza`);
+    }
+    return updated;
   },
   delete: async function (num) {
     const polizaa = await Poliza.findOneAndRemove({ polizaNumber: num });
@@ -56,14 +60,14 @@ const polizaController = {
     }
     return polizaa;
   },
-  link: async function(nombreAseguradora, polizaNumber) {
-    const aseg = await Aseguradora.findOne({nombre: nombreAseguradora});
+  link: async function (nombreAseguradora, polizaNumber) {
+    const aseg = await Aseguradora.findOne({ nombre: nombreAseguradora });
     if (aseg === null || aseg === {}) throw new NotFoundError(`Not found: ${nombreAseguradora}`);
-    const poliza = Poliza.findOneAndUpdate({polizaNumber: polizaNumber},
-      {aseguradora: aseg}, {returnOriginal: false});
+    const poliza = Poliza.findOneAndUpdate({ polizaNumber: polizaNumber },
+      { aseguradora: aseg }, { returnOriginal: false });
     return poliza;
   },
-  addCampos: async function(polizaNumber, productName, asegurado, aseguradora, tipo) {
+  addCampos: async function (polizaNumber, productName, asegurado, aseguradora, tipo) {
     const polizaa = await Poliza.findOne({ polizaNumber: polizaNumber });
     const aseguradoraRef = await Aseguradora.findOne({ nombre: aseguradora });
     if (polizaa !== {} && polizaa !== null) {
@@ -72,8 +76,8 @@ const polizaController = {
         asegurado: asegurado,
         aseguradora: aseguradoraRef,
         tipo: tipo
-      }, {returnOriginal: false}).populate('aseguradora');
-  }
+      }, { returnOriginal: false }).populate('aseguradora');
+    }
   }
 };
 
