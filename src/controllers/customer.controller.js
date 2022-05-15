@@ -35,12 +35,8 @@ const customerController = {
     return customer;
   },
   update: async function (name, lastName, email, telefono) {
-    const customer = await Customer.findOne({
-      email: email
-    })
-    let updated;
-    if (customer !== null) {
-      updated = await Customer.findOneAndUpdate({
+    try {
+      return await Customer.findOneAndUpdate({
         email: email
       },
         {
@@ -50,10 +46,9 @@ const customerController = {
           telefono: telefono
         }, { returnOriginal: false });
     }
-    else {
+    catch { e } {
       throw new NotFoundError(`email ${email} not associated to any account`);
     }
-    return updated;
   },
   delete: async function (email) {
     const customer = await Customer.findOneAndRemove({
