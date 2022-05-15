@@ -18,10 +18,10 @@ require('./config/db');
 require('./config/passport');
 
 const uploadRoute = require('./routes/upload.route');
-const {NotFoundError} = require('./utils/errors');
+const { NotFoundError } = require('./utils/errors');
 
 const app = express();
-const swaggerDocument = YAML.load('src/docs/swagger.yaml');
+const swaggerDocument = YAML.load('src/docs/misSeguros-0.1-swagger.yaml');
 
 app.use(cookieSession({
   maxAge: 24 * 60 * 60 * 1000,
@@ -30,7 +30,7 @@ app.use(cookieSession({
 
 app.use(cors());
 app.use(express.json());
-app.use(express.urlencoded({extended: true}));
+app.use(express.urlencoded({ extended: true }));
 
 app.use(passport.initialize());
 app.use(passport.session());
