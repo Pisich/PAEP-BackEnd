@@ -30,7 +30,7 @@ const polizaController = {
       tipo: tipo,
       active: true,
       fechaVencimiento: venc
-    }).populate('aseguradora');
+    });
     return polizaa;
   },
   update: async function (filename, productName, polizaNumber, polizaUrl, asegurado, aseguradora, tipo) {
