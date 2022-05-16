@@ -38,7 +38,7 @@ router.put('/', handleError(async (req, res) => {
   const polizaUrl = "" || body.polizaUrl || data.polizaUrl;
   const polizaNumber = body.polizaNumber || data.polizaNumber;
   const asegurado = body.asegurado || data.asegurado;
-  const aseguradora = body.aseguradora || data.aseguradora;
+  const aseguradora = body.aseguradora || data.aseguradora.nombre;
   const tipo = body.tipo || data.tipo;
   const productName = body.productName || data.productName;
 

@@ -8,7 +8,7 @@ const external = require('../controllers/external.controller');
 
 const polizaController = {
   getAll: async function () {
-    const polizaa = await Poliza.find().populate('aseguradora');
+    const polizaa = await Poliza.find();
     if (polizaa === {}) throw new NotFoundError(`Poliza number ${num} not associated to any poliza`);
     return polizaa;
   },
@@ -30,13 +30,14 @@ const polizaController = {
       tipo: tipo,
       active: true,
       fechaVencimiento: venc
-    });
+    }).populate('aseguradora');
     return polizaa;
   },
   update: async function (filename, productName, polizaNumber, polizaUrl, asegurado, aseguradora, tipo) {
     let updated;
     const polizaa = await Poliza.findOne({ polizaNumber: polizaNumber });
     const aseguradoraRef = await Aseguradora.findOne({ nombre: aseguradora });
+    console.log("aseguradoraRef", aseguradoraRef);
     if (polizaa !== {}) {
       updated = await Poliza.findOneAndUpdate({ polizaNumber: polizaNumber }, {
         filename: filename,
