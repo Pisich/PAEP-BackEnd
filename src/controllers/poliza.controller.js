@@ -18,7 +18,7 @@ const polizaController = {
     return polizaa;
   },
   create: async function (filename, productName, polizaNumber, polizaUrl, asegurado, aseguradora, tipo) {
-    const aseguradoraRef = await Aseguradora.findOne({ aseguradora: aseguradora });
+    const aseguradoraRef = await Aseguradora.findOne({ nombre: aseguradora });
     const venc = Date.now() + 432000000;
     const polizaa = await Poliza.create({
       filename: filename,
